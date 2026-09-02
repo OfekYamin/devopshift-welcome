@@ -1,3 +1,4 @@
+#docker-compose.yaml
 services:
     jenkins:
         build: ./jenkins/master
@@ -34,16 +35,30 @@ services:
             - 'SLAVE_EXECUTORS=8'
 
 
-        # ports:
-        #     - "5005-5010:5005-5010"
+        ports:
+            - "5005-5010:5005-5010"
 
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock  # Expose the docker daemon in the container
             - ./volume:/home/jenkins/volume  # Persist data in the slave
         networks: 
-        - jb
+            - jb
         depends_on:
             - jenkins
 
+    sonarqube: 
+        ports: 
+            - '9000:9000' 
+        volumes: 
+            - sonarqube:/opt/sonarqube/
+        image: sonarqube
+        networks: 
+            - jb
+
+
+
 networks: 
   jb:
+volumes: 
+  sonarqube:
+
