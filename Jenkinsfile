@@ -5,19 +5,19 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-              buildApp()
+              mylibrary.buildApp()
                 // Build steps here
             }
         }
         stage('Test') {
             steps {
-                testApp()
+                mylibrary.testApp()
                 // Test steps here
             }
         }
         stage('Deploy') {
             steps {
-                deployApp()
+                mylibrary.deployApp()
                 // Deploy steps here
             }
         }
